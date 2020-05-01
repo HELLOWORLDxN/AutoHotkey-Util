@@ -26,6 +26,41 @@
  *     GitHub      - http://goo.gl/JfzFTh
  *     Forum Topic - http://goo.gl/sMufTt
  */
+
+/*
+    example:
+        #Include <OnWin>
+        #Persistent
+         
+        OnWin("Exist", "Calculator", Func("C"))
+        Sleep, 1000
+        Run, calc.exe
+        return
+         
+        C(this)
+        {
+            static window
+            event := this.Event, window := this.WinTitle
+            MsgBox, Event: %event%`nWindow: %window%
+            OnWin("Close", window, Func("X"))
+            SetTimer, close, -1000
+            return
+        close:
+            WinClose, %window%
+            return
+        }
+         
+        X(this)
+        {
+            event := this.Event, window := this.WinTitle
+            MsgBox, Event: %event%`nWindow: %window%
+            SetTimer, exit, -1 ; allow function to return
+            return
+        exit:
+            ExitApp
+}
+*/
+
 OnWin(args*)
 {
 	return __OnWinEvent(args*)
